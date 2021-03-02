@@ -1,6 +1,7 @@
 {
   "contracts": {
     "mode": "new",
-    "kit": "d"
+    "kit": "d",
+    "mnp": true
   }
 }

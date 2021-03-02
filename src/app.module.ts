@@ -11,6 +11,8 @@ import { ConfigModule } from './config/config.module';
 import { DigitalsalesenablerModule } from './digitalsalesenabler/digitalsalesenabler.module';
 import { PassportV2Module } from './passport-v2/passport-v2.module';
 import { AddressModule } from './address/address.module';
+import { SettingsModule } from './settings/settings.module';
+import { SettingsV1Module } from './settings-v1/settings-v1.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { AddressModule } from './address/address.module';
     DigitalsalesenablerModule,
     PassportV2Module,
     AddressModule,
+    SettingsModule,
+    SettingsV1Module,
   ],
   controllers: [],
   providers: [],

@@ -18,8 +18,14 @@ import {
 } from './contracts.models';
 
 import * as NEW_D_CHECK_CUSTOMER_MOCK from './data/new-d-check-customer.json';
+import * as NEW_D_MNP_CHECK_CUSTOMER_MOCK from './data/new-d-mnp-check-customer.json';
+
 import * as EXIST_D_CHECK_CUSTOMER_MOCK from './data/exist-d-check-customer.json';
+import * as EXIST_D_MNP_CHECK_CUSTOMER_MOCK from './data/exist-d-mnp-check-customer.json';
+
 import * as GET_AGREEMENT_DETAILS_MOCK from './data/get-agreement-details.json';
+import * as GET_MNP_AGREEMENT_DETAILS_MOCK from './data/get-mnp-agreement-details.json';
+
 import * as GET_BILL_PLANS_MOCK from './data/get-bill-plans.json';
 import * as GET_PAY_SYSTEMS_MOCK from './data/get-pay-systems.json';
 import * as GET_DOC_TYPES_MOCK from './data/doc-types.json';
@@ -31,7 +37,7 @@ import * as ROOM_TYPES_MOCK from './data/room-types.json';
 import * as PLACE_TYPES_MOCK from './data/place-types.json';
 import * as STREET_TYPES_MOCK from './data/street-types.json';
 import * as RECOG_DOC_TYPES_MOCK from './data/recog-document-types.json';
-import * as GET_AGREEMENT_HISTORY_MOCK from './data/get-agrement-history.json';
+import * as GET_AGREEMENT_HISTORY_MOCK from './data/get-agreement-history.json';
 
 import * as ATTACHMENT_PROFILE_CONTRACT_MOCK from './data/attachment-profile-contract.json';
 import * as ATTACHMENT_PROFILE_IDENTIFY_MOCK from './data/attachment-profile-identify.json';
@@ -51,15 +57,30 @@ export class ContractsController {
     switch (this._configService.config.contracts.mode) {
       case EContractsModes.NEW:
         switch (this._configService.config.contracts.kit) {
-          case EContractsKits.D:
-            return res.status(HttpStatus.OK).json(NEW_D_CHECK_CUSTOMER_MOCK);
+          case EContractsKits.D: {
+            if (this._configService.config.contracts.mnp) {
+              return res
+                .status(HttpStatus.OK)
+                .json(NEW_D_MNP_CHECK_CUSTOMER_MOCK);
+            } else {
+              return res.status(HttpStatus.OK).json(NEW_D_CHECK_CUSTOMER_MOCK);
+            }
+          }
           default:
             return res.status(HttpStatus.OK).json(NEW_D_CHECK_CUSTOMER_MOCK);
         }
       case EContractsModes.EDIT:
         switch (this._configService.config.contracts.kit) {
           case EContractsKits.D:
-            return res.status(HttpStatus.OK).json(EXIST_D_CHECK_CUSTOMER_MOCK);
+            if (this._configService.config.contracts.mnp) {
+              return res
+                .status(HttpStatus.OK)
+                .json(EXIST_D_MNP_CHECK_CUSTOMER_MOCK);
+            } else {
+              return res
+                .status(HttpStatus.OK)
+                .json(EXIST_D_CHECK_CUSTOMER_MOCK);
+            }
           default:
             return res.status(HttpStatus.OK).json(EXIST_D_CHECK_CUSTOMER_MOCK);
         }
@@ -74,7 +95,11 @@ export class ContractsController {
     @Query('isFromRegistry') isFromRegistry: boolean,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.OK).json(GET_AGREEMENT_DETAILS_MOCK);
+    if (this._configService.config.contracts.mnp) {
+      return res.status(HttpStatus.OK).json(GET_AGREEMENT_DETAILS_MOCK);
+    } else {
+      return res.status(HttpStatus.OK).json(GET_MNP_AGREEMENT_DETAILS_MOCK);
+    }
   }
 
   @Get('getTariffPlans')
