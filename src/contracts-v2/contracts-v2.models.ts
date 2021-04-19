@@ -49,6 +49,11 @@ export interface CreateDraftRequest {
   isFamily: boolean;
 }
 
+export interface ICreateGraphicSignSessionResponse {
+  sessionId: string;
+  expiration: string;
+}
+
 /*export interface IVerificationResponse {
   paySystem: number;
   price?: number;

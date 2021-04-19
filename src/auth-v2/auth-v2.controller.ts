@@ -12,6 +12,7 @@ import * as SMS_LOGON_MOCK from './data/sms-logon.json';
 import * as CONFIRM_SMS_LOGON_MOCK from './data/confirm-sms-logon.json';
 import * as AUTH_IN_SALES_POINT_MOCK from './data/auth-in-sales-point.json';
 import * as AUTH_USER_MOCK from './data/auth-user.json';
+import * as REFRESH_TOKEN_ERROR_MOCK from './data/refr-token-err-unauth.json';
 
 @Controller('v2/auth')
 export class AuthV2Controller {
@@ -21,6 +22,7 @@ export class AuthV2Controller {
     @Res() res: Response,
   ) {
     const mock = REFRESH_TOKEN_MOCK as AuthRefreshResponse;
+    // mock.accessToken.value = (Math.random() + Math.random()).toString();
     mock.accessToken.expires = new Date(
       new Date().setDate(new Date().getDate() + 1),
     ).toISOString();
@@ -28,6 +30,7 @@ export class AuthV2Controller {
       new Date().setDate(new Date().getDate() + 3),
     ).toISOString();
     return res.status(HttpStatus.OK).json(mock);
+    // return res.status(HttpStatus.UNAUTHORIZED).json(REFRESH_TOKEN_ERROR_MOCK);
   }
 
   @Post('sms-logon')

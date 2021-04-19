@@ -22,19 +22,16 @@ import * as GET_STATUSES_LIST_MOCK from './data/get-statuses-list.json';
 import * as CREATE_DRAFT_MOCK from './data/create-draft.json';
 import * as SEND_TO_MNP_REG_MOCK from './data/send-to-mnp-reg.json';
 import * as SEND_TO_MNP_E_REG_MOCK from './data/send-to-e-mnp-reg.json';
-
-import * as GET_AGREEMENT_DETAILS_MOCK from './data/get-agreement-details.json';
-import * as GET_MNP_AGREEMENT_DETAILS_MOCK from './data/get-mnp-agreement-details.json';
+import * as SEND_TO_REG_MOCK from './data/send-to-reg.json';
+import * as CREATE_GSIGN_MOCK from './data/create-gsign.json';
 
 import {
   ContractListFilterRequest,
   CreateDraftRequest,
-  FilterListRequest,
+  FilterListRequest, ICreateGraphicSignSessionResponse,
 } from './contracts-v2.models';
 import { ConfigService } from '../config/config.service';
 import { EContractsKits, EContractsModes } from '../config/config.enums';
-import * as NEW_D_MNP_CHECK_CUSTOMER_MOCK from '../contracts/data/new-d-mnp-check-customer.json';
-import * as NEW_D_CHECK_CUSTOMER_MOCK from '../contracts/data/new-d-check-customer.json';
 
 @Controller('v2/contract')
 export class ContractsV2Controller {
@@ -42,15 +39,6 @@ export class ContractsV2Controller {
 
   @Get('check-possible')
   public async checkPossible(
-    @Query('iccId') iccId: string,
-    @Query('checkCode') checkCode: string,
-    @Res() res: Response,
-  ) {
-    return res.status(HttpStatus.OK).json(this._getCheckResponse());
-  }
-
-  @Get('check')
-  public async checkPossibleV3(
     @Query('iccId') iccId: string,
     @Query('checkCode') checkCode: string,
     @Res() res: Response,
@@ -91,14 +79,6 @@ export class ContractsV2Controller {
     return res.status(HttpStatus.OK).json(CREATE_DRAFT_MOCK);
   }
 
-  @Post('create')
-  public async createDraftV3(
-    @Body() req: CreateDraftRequest,
-    @Res() res: Response,
-  ) {
-    return res.status(HttpStatus.OK).json(CREATE_DRAFT_MOCK);
-  }
-
   @Post('update')
   public async updateDraft(@Res() res: Response) {
     return res.status(HttpStatus.OK).json();
@@ -120,17 +100,24 @@ export class ContractsV2Controller {
     return res.status(HttpStatus.OK).json(SEND_TO_MNP_E_REG_MOCK);
   }
 
-  @Get(':contractId/info')
-  public async getAgreementDetailsV3(
-    @Param('contractId') contractId: number,
-    @Query('isFromRegistry') isFromRegistry: boolean,
+  @Post(':contractId/register')
+  public async sendAgreementToRegistration(
+    @Param('contractId') contractId: string,
     @Res() res: Response,
   ) {
-    if (this._configService.config.contracts.mnp) {
-      return res.status(HttpStatus.OK).json(GET_MNP_AGREEMENT_DETAILS_MOCK);
-    } else {
-      return res.status(HttpStatus.OK).json(GET_AGREEMENT_DETAILS_MOCK);
-    }
+    return res.status(HttpStatus.OK).json(SEND_TO_REG_MOCK);
+  }
+
+  @Post(':contractId/gsign')
+  public async contractGSign(
+    @Param('contractId') contractId: number,
+    @Res() res: Response,
+  ) {
+    const mock = CREATE_GSIGN_MOCK as ICreateGraphicSignSessionResponse;
+    mock.expiration = new Date(
+      new Date().getTime() + 10 * 60 * 1000,
+    ).toISOString();
+    return res.status(HttpStatus.OK).json(mock);
   }
 
   private _getCheckResponse() {

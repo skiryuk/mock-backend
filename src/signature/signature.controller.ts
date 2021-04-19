@@ -1,6 +1,18 @@
-import { Controller, Get, HttpStatus, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Post,
+  Query,
+  Res,
+} from '@nestjs/common';
 import { Response } from 'express';
+import { ISaveSignatureRequest } from './signature.models';
+
 import * as GET_LAST_SIGNATURE_MOCK from './data/last-signature.json';
+import * as GET_SIGNATURE_HISTORY_MOCK from './data/signature-history.json';
+import * as SIGNATURE_CONTENT_MOCK from './data/signature-content.json';
 
 @Controller('signature')
 export class SignatureController {
@@ -8,4 +20,24 @@ export class SignatureController {
   public async getLastSignature(@Res() res: Response) {
     return res.status(HttpStatus.OK).json(GET_LAST_SIGNATURE_MOCK);
   }
+  @Get('GetSignaturesHistory')
+  public async getSignaturesHistory(@Res() res: Response) {
+    return res.status(HttpStatus.OK).json(GET_SIGNATURE_HISTORY_MOCK);
+  }
+  @Get('getSignatureContent')
+  public async getSignatureContent(
+    @Query('signaturePath') signaturePath: string,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(SIGNATURE_CONTENT_MOCK);
+  }
+
+  @Post('SaveSignatureContent')
+  public async saveSignatureContent(
+    @Body() req: ISaveSignatureRequest,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json();
+  }
+
 }
