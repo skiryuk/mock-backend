@@ -1,16 +1,17 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   HttpStatus,
   Param,
   Post,
   Put,
   Query,
-  Res, UploadedFile,
+  Res,
+  UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 
 import {
@@ -30,9 +31,8 @@ import * as CREATE_AO_MOCK from './data/create-ao.json';
 import * as GET_SUBSCRIBER_INFO_MOCK from './data/get-subscriber-info.json';
 import * as GET_REJECTION_REASONS_MOCK from './data/get-rejection-reasons.json';
 import * as MNP_CHECK_MOCK from './data/mnp-check.json';
-import fs from "fs";
-import stream from "stream";
-import { FileInterceptor } from '@nestjs/platform-express';
+import * as fs from 'fs';
+import * as stream from 'stream';
 
 @Controller('v2/ao')
 export class AoV2Controller {
@@ -100,7 +100,7 @@ export class AoV2Controller {
     return res.status(HttpStatus.OK).json();
   }
 
-  @Get('request/:requestId/execute')
+  @Post('request/:requestId/execute')
   public async executeAbonentOperationV2(
     @Query('requestId') requestId: string,
     @Res() res: Response,

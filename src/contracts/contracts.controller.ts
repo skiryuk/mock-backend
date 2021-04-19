@@ -42,6 +42,7 @@ import * as GET_AGREEMENT_HISTORY_MOCK from './data/get-agreement-history.json';
 import * as ATTACHMENT_PROFILE_CONTRACT_MOCK from './data/attachment-profile-contract.json';
 import * as ATTACHMENT_PROFILE_IDENTIFY_MOCK from './data/attachment-profile-identify.json';
 import * as ATTACHMENT_PROFILE_MNP_MOCK from './data/attachment-profile-mnp.json';
+import * as GET_CONTRACT_STATUSES_MOCK from './data/get-contract-statuses.json';
 
 import { EProfileAliases } from './contracts.enums';
 
@@ -199,5 +200,10 @@ export class ContractsController {
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json(GET_AGREEMENT_HISTORY_MOCK);
+  }
+
+  @Get('getContractStatuses')
+  public async getContractStatuses(@Res() res: Response) {
+    return res.status(HttpStatus.OK).json(GET_CONTRACT_STATUSES_MOCK);
   }
 }

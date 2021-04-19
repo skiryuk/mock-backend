@@ -1,7 +1,7 @@
 import { Controller, Get, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
-import fs from 'fs';
-import stream from 'stream';
+import * as fs from 'fs';
+import * as stream from 'stream';
 
 @Controller('documents')
 export class DocumentsController {

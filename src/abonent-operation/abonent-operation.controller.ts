@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Get,
-  HttpStatus, Param,
+  HttpStatus,
   Post,
   Query,
   Res,
@@ -17,7 +17,8 @@ import {
   IGetAbonentAdBillPlanInfoRequest,
   ISendSmsIdentifyReq,
   ISetTargetOfferAnswerRequest,
-  ISmsConfirmationInfoRequest, ITransferingOperationStatusReq,
+  ISmsConfirmationInfoRequest,
+  ITransferingOperationStatusReq,
 } from './abonent-operation.models';
 import * as GET_AO_TYPES_MOCK from './data/get-ao-types.json';
 import * as GET_AO_DETAILS_MOCK from './data/get-ao-details.json';
@@ -45,8 +46,9 @@ import * as CHECK_SMS_IDENTIFY_MOCK from './data/check-sms-identify.json';
 import * as CHECK_TRANSFER_NUMBER_MOCK from './data/check-transfer-number.json';
 import * as CANCEL_CHECK_TRANSFER_NUMBER_MOCK from './data/cancel-check-transfer.json';
 import * as GET_TRANSFERRING_STATUS_MOCK from './data/get-transferring-status.json';
-import fs from "fs";
-import stream from "stream";
+
+import * as fs from 'fs';
+import * as stream from 'stream';
 
 @Controller('AbonentOperation')
 export class AbonentOperationController {
@@ -69,7 +71,7 @@ export class AbonentOperationController {
     return res.status(HttpStatus.OK).json(GET_AO_DETAILS_MOCK);
   }
 
-  @Get('getTargetOffers')
+  @Get('getTargetOfferList')
   public async getTargetOffers(
     @Query('phone') phone: string,
     @Res() res: Response,
