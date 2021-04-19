@@ -30,6 +30,8 @@ import { ContractsV1Module } from './contracts-v1/contracts-v1.module';
 import { OnlineShopModule } from './online-shop/online-shop.module';
 import { CaseV2Module } from './case-v2/case-v2.module';
 import { RegistryModule } from './registry/registry.module';
+import { ManagementModule } from './management/management.module';
+import { DealersModule } from './dealers/dealers.module';
 
 @Module({
   imports: [
@@ -64,6 +66,8 @@ import { RegistryModule } from './registry/registry.module';
     OnlineShopModule,
     CaseV2Module,
     RegistryModule,
+    ManagementModule,
+    DealersModule,
   ],
   controllers: [],
   providers: [],

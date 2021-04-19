@@ -13,6 +13,7 @@ import { ISaveSignatureRequest } from './signature.models';
 import * as GET_LAST_SIGNATURE_MOCK from './data/last-signature.json';
 import * as GET_SIGNATURE_HISTORY_MOCK from './data/signature-history.json';
 import * as SIGNATURE_CONTENT_MOCK from './data/signature-content.json';
+import * as GET_CONFIRMED_SIGNATURE_MOCK from './data/get-confirmed-signature.json';
 
 @Controller('signature')
 export class SignatureController {
@@ -31,13 +32,16 @@ export class SignatureController {
   ) {
     return res.status(HttpStatus.OK).json(SIGNATURE_CONTENT_MOCK);
   }
+  @Get('getConfirmedSignature')
+  public async getConfirmedSignature(@Res() res: Response) {
+    return res.status(HttpStatus.OK).json(GET_CONFIRMED_SIGNATURE_MOCK);
+  }
 
   @Post('SaveSignatureContent')
   public async saveSignatureContent(
     @Body() req: ISaveSignatureRequest,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.OK).json();
+    return res.status(HttpStatus.NO_CONTENT).json();
   }
-
 }
