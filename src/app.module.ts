@@ -23,6 +23,13 @@ import { AbonentOperationV2Module } from './abonent-operation-v2/abonent-operati
 import { DocumentsModule } from './documents/documents.module';
 import { RecognizeV2Module } from './recognize-v2/recognize-v2.module';
 import { MpV1Module } from './mp-v1/mp-v1.module';
+import { CasesModule } from './cases/cases.module';
+import { CasesV2Module } from './cases-v2/cases-v2.module';
+import { AdditionalServicesModule } from './additional-services/additional-services.module';
+import { ContractsV1Module } from './contracts-v1/contracts-v1.module';
+import { OnlineShopModule } from './online-shop/online-shop.module';
+import { CaseV2Module } from './case-v2/case-v2.module';
+import { RegistryModule } from './registry/registry.module';
 
 @Module({
   imports: [
@@ -50,6 +57,13 @@ import { MpV1Module } from './mp-v1/mp-v1.module';
     DocumentsModule,
     RecognizeV2Module,
     MpV1Module,
+    CasesModule,
+    CasesV2Module,
+    AdditionalServicesModule,
+    ContractsV1Module,
+    OnlineShopModule,
+    CaseV2Module,
+    RegistryModule,
   ],
   controllers: [],
   providers: [],

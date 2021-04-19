@@ -13,8 +13,9 @@ import { Response } from 'express';
 import { EContractsKits, EContractsModes } from '../config/config.enums';
 import { ConfigService } from '../config/config.service';
 import {
-  RemoveContractConnectionRequest,
-  SendEContractRegistrationRequest,
+  IGetBillingPlansRequest,
+  IRemoveContractConnectionRequest,
+  ISendEContractRegistrationRequest,
 } from './contracts.models';
 
 import * as NEW_D_CHECK_CUSTOMER_MOCK from './data/new-d-check-customer.json';
@@ -43,6 +44,8 @@ import * as ATTACHMENT_PROFILE_CONTRACT_MOCK from './data/attachment-profile-con
 import * as ATTACHMENT_PROFILE_IDENTIFY_MOCK from './data/attachment-profile-identify.json';
 import * as ATTACHMENT_PROFILE_MNP_MOCK from './data/attachment-profile-mnp.json';
 import * as GET_CONTRACT_STATUSES_MOCK from './data/get-contract-statuses.json';
+import * as GET_ECM_ERROR_COUNTS_MOCK from './data/get-ecm-error-counts.json';
+import * as GET_DEALER_BILLING_PLANS_MOCK from './data/get-dealer-billing-plans.json';
 
 import { EProfileAliases } from './contracts.enums';
 
@@ -129,7 +132,7 @@ export class ContractsController {
 
   @Post('deleteConnectionFromAgreement')
   public async removeContractConnection(
-    @Body() req: RemoveContractConnectionRequest,
+    @Body() req: IRemoveContractConnectionRequest,
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json();
@@ -146,7 +149,7 @@ export class ContractsController {
   @Post('sendAgreementToRegistrationWithSignature')
   public async sendAgreementToRegistrationWithSignature(
     @Query('contractId') contractId: string,
-    @Body() req: SendEContractRegistrationRequest,
+    @Body() req: ISendEContractRegistrationRequest,
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json(SEND_TO_E_REG_MOCK);
@@ -205,5 +208,18 @@ export class ContractsController {
   @Get('getContractStatuses')
   public async getContractStatuses(@Res() res: Response) {
     return res.status(HttpStatus.OK).json(GET_CONTRACT_STATUSES_MOCK);
+  }
+
+  @Get('attachment/ecm-error-count')
+  public async getEcmErrorCount(@Res() res: Response) {
+    return res.status(HttpStatus.OK).json(GET_ECM_ERROR_COUNTS_MOCK);
+  }
+
+  @Post('GetDealerBillingPlans')
+  public async getDealerBillingPlans(
+    @Body() req: IGetBillingPlansRequest,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(GET_DEALER_BILLING_PLANS_MOCK);
   }
 }

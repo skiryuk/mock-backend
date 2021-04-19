@@ -69,4 +69,9 @@ export class AuthV2Controller {
   public async getAuthUser(@Res() res: Response) {
     return res.status(HttpStatus.OK).json(AUTH_USER_MOCK);
   }
+
+  @Get('check')
+  public async authCheck(@Res() res: Response) {
+    return res.status(HttpStatus.OK).json();
+  }
 }

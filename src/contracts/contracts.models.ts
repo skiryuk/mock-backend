@@ -4,11 +4,15 @@ export interface IContractCreateVerificationCheckRes {
   ctn: string;
 }
 
-export interface RemoveContractConnectionRequest {
+export interface IRemoveContractConnectionRequest {
   connectionId: number;
   contractId: number;
 }
 
-export interface SendEContractRegistrationRequest {
+export interface ISendEContractRegistrationRequest {
   content: string;
+}
+
+export interface IGetBillingPlansRequest {
+  paySystemTypeCode: number;
 }
