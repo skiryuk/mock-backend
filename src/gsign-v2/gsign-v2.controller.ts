@@ -5,13 +5,17 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { IUpdateContractGraphicSessionRequest } from './gsign-v2.models';
+import {
+  IUpdateAoGraphicSessionRequest,
+  IUpdateContractGraphicSessionRequest,
+} from './gsign-v2.models';
 import * as fs from 'fs';
 import * as stream from 'stream';
 
@@ -24,16 +28,25 @@ export class GsignV2Controller {
     @UploadedFile() image: Express.Multer.File,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.OK).json();
+    return res.status(HttpStatus.NO_CONTENT).json();
   }
 
-  @Post('session/:sessionId/contract/data')
+  @Put('session/:sessionId/contract/abonent')
   public async updateContractGraphicSession(
     @Param('sessionId') sessionId: string,
     @Body() req: IUpdateContractGraphicSessionRequest,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.OK).json();
+    return res.status(HttpStatus.NO_CONTENT).json();
+  }
+
+  @Put('session/:sessionId/ao/abonent')
+  public async updateAoGraphicSession(
+    @Param('sessionId') sessionId: string,
+    @Body() req: IUpdateAoGraphicSessionRequest,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.NO_CONTENT).json();
   }
 
   @Get('session/:sessionId/contract/preview')

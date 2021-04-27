@@ -3,5 +3,8 @@
     "mode": "edit",
     "kit": "d",
     "mnp": false
+  },
+  "ao": {
+    "type": 4
   }
 }

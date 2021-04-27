@@ -17,8 +17,10 @@ import { ConfigService } from '../config/config.service';
 
 import * as NEW_D_MNP_CHECK_POSSIBLE_MOCK from './data/new-d-mnp-check-possible.json';
 import * as NEW_D_CHECK_POSSIBLE_MOCK from './data/new-d-check-possible.json';
+import * as NEW_P_CHECK_POSSIBLE_MOCK from './data/new-p-check-possible.json';
 import * as EXIST_D_MNP_CHECK_POSSIBLE_MOCK from './data/exist-d-mnp-check-possible.json';
 import * as EXIST_D_CHECK_POSSIBLE_MOCK from './data/exist-d-check-possible.json';
+import * as EXIST_P_CHECK_POSSIBLE_MOCK from './data/exist-p-check-possible.json';
 import * as GET_MNP_AGREEMENT_DETAILS_MOCK from './data/get-mnp-agreement-details.json';
 import * as GET_AGREEMENT_DETAILS_MOCK from './data/get-agreement-details.json';
 import * as CREATE_DRAFT_MOCK from './data/create-draft.json';
@@ -66,6 +68,12 @@ export class ContractsV3Controller {
             } else {
               return NEW_D_CHECK_POSSIBLE_MOCK;
             }
+          case EContractsKits.P:
+            if (this._configService.config.contracts.mnp) {
+              return NEW_D_MNP_CHECK_POSSIBLE_MOCK;
+            } else {
+              return NEW_P_CHECK_POSSIBLE_MOCK;
+            }
           default:
             return NEW_D_CHECK_POSSIBLE_MOCK;
         }
@@ -76,6 +84,12 @@ export class ContractsV3Controller {
               return EXIST_D_MNP_CHECK_POSSIBLE_MOCK;
             } else {
               return EXIST_D_CHECK_POSSIBLE_MOCK;
+            }
+          case EContractsKits.P:
+            if (this._configService.config.contracts.mnp) {
+              return EXIST_D_MNP_CHECK_POSSIBLE_MOCK;
+            } else {
+              return EXIST_P_CHECK_POSSIBLE_MOCK;
             }
           default:
             return EXIST_D_CHECK_POSSIBLE_MOCK;

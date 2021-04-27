@@ -14,12 +14,17 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 
+import * as fs from 'fs';
+import * as stream from 'stream';
+
 import {
   ICheckTransferNumberReq,
   ICreateAbonentOperationRequest,
   ICreateGraphicSignSessionResponse,
   IFilterListRequest,
 } from './ao-v2.models';
+import { ConfigService } from '../config/config.service';
+import { ERequestOperationTypes } from '../config/config.enums';
 
 import * as CREATE_GSIGN_MOCK from './data/create-gsign.json';
 import * as GET_AO_LIST_MOCK from './data/get-ao-list.json';
@@ -31,11 +36,19 @@ import * as CREATE_AO_MOCK from './data/create-ao.json';
 import * as GET_SUBSCRIBER_INFO_MOCK from './data/get-subscriber-info.json';
 import * as GET_REJECTION_REASONS_MOCK from './data/get-rejection-reasons.json';
 import * as MNP_CHECK_MOCK from './data/mnp-check.json';
-import * as fs from 'fs';
-import * as stream from 'stream';
+
+import * as GET_AO_BLOCKING_INFO_MOCK from './data/info/get-ao-blocking-info.json';
+import * as GET_AO_DETALIZATION_INFO_MOCK from './data/info/get-ao-detalization-info.json';
+import * as GET_AO_REJECTION_INFO_MOCK from './data/info/get-ao-rejection-info.json';
+
+import * as GET_AO_BLOCKING_DETAILS_MOCK from './data/details/get-ao-blocking-details.json';
+import * as GET_AO_DETALIZATION_DETAILS_MOCK from './data/details/get-ao-detalization-details.json';
+import * as GET_AO_REJECTION_DETAILS_MOCK from './data/details/get-ao-rejection-details.json';
 
 @Controller('v2/ao')
 export class AoV2Controller {
+  constructor(private _configService: ConfigService) {}
+
   @Post('request/:requestId/gsign')
   public async requestGSign(
     @Param('requestId') requestId: number,
@@ -73,6 +86,14 @@ export class AoV2Controller {
     @Query('ctn') ctn: string,
     @Res() res: Response,
   ) {
+    switch (this._configService.config.ao.type) {
+      case ERequestOperationTypes.BLOCKING:
+        return res.status(HttpStatus.OK).json(GET_AO_BLOCKING_DETAILS_MOCK);
+      case ERequestOperationTypes.DETALIZATION:
+        return res.status(HttpStatus.OK).json(GET_AO_DETALIZATION_DETAILS_MOCK);
+      case ERequestOperationTypes.REJECT_CONTRACT:
+        return res.status(HttpStatus.OK).json(GET_AO_REJECTION_DETAILS_MOCK);
+    }
     return res.status(HttpStatus.OK).json(GET_AO_DETAILS_MOCK);
   }
 
@@ -89,6 +110,14 @@ export class AoV2Controller {
     @Param('requestId') requestId: string,
     @Res() res: Response,
   ) {
+    switch (this._configService.config.ao.type) {
+      case ERequestOperationTypes.BLOCKING:
+        return res.status(HttpStatus.OK).json(GET_AO_BLOCKING_INFO_MOCK);
+      case ERequestOperationTypes.DETALIZATION:
+        return res.status(HttpStatus.OK).json(GET_AO_DETALIZATION_INFO_MOCK);
+      case ERequestOperationTypes.REJECT_CONTRACT:
+        return res.status(HttpStatus.OK).json(GET_AO_REJECTION_INFO_MOCK);
+    }
     return res.status(HttpStatus.OK).json(GET_AO_REQ_INFO_MOCK);
   }
 
