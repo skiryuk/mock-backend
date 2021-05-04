@@ -32,6 +32,7 @@ import { CaseV2Module } from './case-v2/case-v2.module';
 import { RegistryModule } from './registry/registry.module';
 import { ManagementModule } from './management/management.module';
 import { DealersModule } from './dealers/dealers.module';
+import { SalepointV2Module } from './salepoint-v2/salepoint-v2.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { DealersModule } from './dealers/dealers.module';
     RegistryModule,
     ManagementModule,
     DealersModule,
+    SalepointV2Module,
   ],
   controllers: [],
   providers: [],

@@ -23,6 +23,7 @@ export interface AuthLogonResponse {
   errorMessage?: string;
   smsCodeExpiration?: string;
   remainingAttempts: number;
+  authToken?: AuthToken;
 }
 
 export interface AuthCheckCodeLogonResponse {

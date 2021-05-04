@@ -39,6 +39,11 @@ export class AuthV2Controller {
     mock.smsCodeExpiration = new Date(
       new Date().setDate(new Date().getDate() + 1),
     ).toISOString();
+    if (mock.authToken) {
+      mock.authToken.expires = new Date(
+        new Date().setDate(new Date().getDate() + 1),
+      ).toISOString();
+    }
     return res.status(HttpStatus.OK).json(mock);
   }
 
@@ -47,7 +52,13 @@ export class AuthV2Controller {
     @Body() req: AuthCheckCodeLogonRequest,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.OK).json(CONFIRM_SMS_LOGON_MOCK);
+    const mock = CONFIRM_SMS_LOGON_MOCK as AuthCheckCodeLogonResponse;
+    if (mock.authToken) {
+      mock.authToken.expires = new Date(
+        new Date().setDate(new Date().getDate() + 1),
+      ).toISOString();
+    }
+    return res.status(HttpStatus.OK).json(mock);
   }
 
   @Post('sign-in/sales-point')
