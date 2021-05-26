@@ -44,6 +44,9 @@ import * as GET_AO_REJECTION_INFO_MOCK from './data/info/get-ao-rejection-info.j
 import * as GET_AO_BLOCKING_DETAILS_MOCK from './data/details/get-ao-blocking-details.json';
 import * as GET_AO_DETALIZATION_DETAILS_MOCK from './data/details/get-ao-detalization-details.json';
 import * as GET_AO_REJECTION_DETAILS_MOCK from './data/details/get-ao-rejection-details.json';
+import * as GET_UPSELL_OFFERS_MOCK from './data/get-upsell-offers.json';
+import * as GET_CURRENT_BILL_PLAN_INFO_MOCK from './data/get-current-bill-plan-info.json';
+import * as GET_TARGET_OFFERS_MOCK from './data/get-target-offers.json';
 
 @Controller('v2/ao')
 export class AoV2Controller {
@@ -184,5 +187,30 @@ export class AoV2Controller {
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json();
+  }
+
+  @Get('bill-plan/upsell/list')
+  public async getUpsellOffers(
+    @Query('ctn') ctn: string,
+    @Query('soc') soc: string,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(GET_UPSELL_OFFERS_MOCK);
+  }
+
+  @Get('bill-plan/info')
+  public async getCurrentBillPlanInfo(
+    @Query('phone') phone: string,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(GET_CURRENT_BILL_PLAN_INFO_MOCK);
+  }
+
+  @Get('target-offer/list')
+  public async getTargetOffers(
+    @Query('phone') phone: string,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(GET_TARGET_OFFERS_MOCK);
   }
 }
