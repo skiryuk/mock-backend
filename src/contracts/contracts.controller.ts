@@ -13,8 +13,10 @@ import { Response } from 'express';
 import { EContractsKits, EContractsModes } from '../config/config.enums';
 import { ConfigService } from '../config/config.service';
 import {
+  IConfirmOpenContractBySmsRequest,
   IGetBillingPlansRequest,
   IRemoveContractConnectionRequest,
+  ISendContractOpenSmsRequest,
   ISendEContractRegistrationRequest,
 } from './contracts.models';
 
@@ -46,6 +48,8 @@ import * as ATTACHMENT_PROFILE_MNP_MOCK from './data/attachment-profile-mnp.json
 import * as GET_CONTRACT_STATUSES_MOCK from './data/get-contract-statuses.json';
 import * as GET_ECM_ERROR_COUNTS_MOCK from './data/get-ecm-error-counts.json';
 import * as GET_DEALER_BILLING_PLANS_MOCK from './data/get-dealer-billing-plans.json';
+import * as SEND_CONTRACT_OPEN_SMS from './data/send-contract-open-sms.json';
+import * as CONFIRM_CONTRACT_OPEN_SMS from './data/confirm-contract-open-sms.json';
 
 import { EProfileAliases } from './contracts.enums';
 
@@ -221,5 +225,21 @@ export class ContractsController {
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json(GET_DEALER_BILLING_PLANS_MOCK);
+  }
+
+  @Post('ctn/sms')
+  public async sendContractOpenSms(
+    @Body() req: ISendContractOpenSmsRequest,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(SEND_CONTRACT_OPEN_SMS);
+  }
+
+  @Post('ctn/confirm')
+  public async confirmOpenContractBySms(
+    @Body() req: IConfirmOpenContractBySmsRequest,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(CONFIRM_CONTRACT_OPEN_SMS);
   }
 }

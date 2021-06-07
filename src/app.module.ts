@@ -33,6 +33,7 @@ import { RegistryModule } from './registry/registry.module';
 import { ManagementModule } from './management/management.module';
 import { DealersModule } from './dealers/dealers.module';
 import { SalepointV2Module } from './salepoint-v2/salepoint-v2.module';
+import { AoV3Module } from './ao-v3/ao-v3.module';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { SalepointV2Module } from './salepoint-v2/salepoint-v2.module';
     ManagementModule,
     DealersModule,
     SalepointV2Module,
+    AoV3Module,
   ],
   controllers: [],
   providers: [],

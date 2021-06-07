@@ -28,7 +28,8 @@ import * as CREATE_GSIGN_MOCK from './data/create-gsign.json';
 import {
   ContractListFilterRequest,
   CreateDraftRequest,
-  FilterListRequest, ICreateGraphicSignSessionResponse,
+  FilterListRequest,
+  ICreateGraphicSignSessionResponse,
 } from './contracts-v2.models';
 import { ConfigService } from '../config/config.service';
 import { EContractsKits, EContractsModes } from '../config/config.enums';

@@ -17,10 +17,14 @@ export class DigitalsalesenablerController {
     @Query('page') page: number,
     @Res() res: Response,
   ) {
-    if (req.phoneNumber) {
-      return res.status(HttpStatus.OK).json(SEARCH_NUMBER_MOCK);
+    if (page < 4) {
+      if (req.phoneNumber) {
+        return res.status(HttpStatus.OK).json(SEARCH_NUMBER_MOCK);
+      }
+      return res.status(HttpStatus.OK).json(BN_LIST_MOCK);
+    } else {
+      return res.status(HttpStatus.OK).json([]);
     }
-    return res.status(HttpStatus.OK).json(BN_LIST_MOCK);
   }
 
   @Post('getDefCodesList')

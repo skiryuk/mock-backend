@@ -16,3 +16,13 @@ export interface ISendEContractRegistrationRequest {
 export interface IGetBillingPlansRequest {
   paySystemTypeCode: number;
 }
+
+export interface ISendContractOpenSmsRequest {
+  ctn: string;
+}
+
+export interface IConfirmOpenContractBySmsRequest {
+  ctn: string;
+  transferCtn: string;
+  code: string;
+}
