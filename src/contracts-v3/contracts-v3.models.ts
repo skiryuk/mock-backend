@@ -5,7 +5,7 @@ export interface IContractCheckRequest {
   iccId: string;
 }
 
-export interface CreateDraftRequest {
+export interface ICreateDraftRequest {
   iccid: string;
   checkCode: string;
   ctn: string;
@@ -19,4 +19,15 @@ export interface CreateDraftRequest {
   contractDate: string;
   actionId: number;
   isFamily: boolean;
+}
+
+export interface IContractCheckResponse {
+  paySystem: number;
+  price?: number;
+  startBalance: number;
+  ctn?: string;
+  iccId: string;
+  contractId: number;
+  canChangeBillPlan: boolean;
+  canUseBeautifulCtn: boolean;
 }

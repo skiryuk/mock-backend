@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { IContractCheckRequest } from './contracts-v3.models';
-import { CreateDraftRequest } from './contracts-v3.models';
+import { ICreateDraftRequest } from './contracts-v3.models';
 
 import { EContractsKits, EContractsModes } from '../config/config.enums';
 import { ConfigService } from '../config/config.service';
@@ -34,7 +34,11 @@ export class ContractsV3Controller {
     @Body() req: IContractCheckRequest,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.OK).json(this._getCheckResponse());
+    const mock = this._getCheckResponse();
+    mock.iccId = `8970199${Math.floor(
+      Math.random() * 100000000000,
+    ).toString()}`;
+    return res.status(HttpStatus.OK).json(mock);
   }
 
   @Get(':contractId/info')
@@ -52,7 +56,7 @@ export class ContractsV3Controller {
 
   @Post('create')
   public async createDraftV3(
-    @Body() req: CreateDraftRequest,
+    @Body() req: ICreateDraftRequest,
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json(CREATE_DRAFT_MOCK);

@@ -13,11 +13,11 @@ import { Response } from 'express';
 import { EContractsKits, EContractsModes } from '../config/config.enums';
 import { ConfigService } from '../config/config.service';
 import {
-  IConfirmOpenContractBySmsRequest,
+  IConfirmOpenContractBySmsRequest, IContractDetailsConnection,
   IGetBillingPlansRequest,
   IRemoveContractConnectionRequest,
   ISendContractOpenSmsRequest,
-  ISendEContractRegistrationRequest,
+  ISendEContractRegistrationRequest, IUpdateContractConnectionRequest,
 } from './contracts.models';
 
 import * as NEW_D_CHECK_CUSTOMER_MOCK from './data/new-d-check-customer.json';
@@ -50,8 +50,11 @@ import * as GET_ECM_ERROR_COUNTS_MOCK from './data/get-ecm-error-counts.json';
 import * as GET_DEALER_BILLING_PLANS_MOCK from './data/get-dealer-billing-plans.json';
 import * as SEND_CONTRACT_OPEN_SMS from './data/send-contract-open-sms.json';
 import * as CONFIRM_CONTRACT_OPEN_SMS from './data/confirm-contract-open-sms.json';
+import * as ADD_CONTRACT_CONNECTION_MOCK from './data/add-contract-connection.json';
 
 import { EProfileAliases } from './contracts.enums';
+import * as SMS_LOGON_MOCK from '../auth-v2/data/sms-logon.json';
+import { AuthLogonResponse } from '../auth-v2/auth-v2.models';
 
 @Controller('contract')
 export class ContractsController {
@@ -132,6 +135,17 @@ export class ContractsController {
   @Get('getCountryTypes')
   public async getCountryTypes(@Res() res: Response) {
     return res.status(HttpStatus.OK).json(GET_COUNTRY_TYPES_MOCK);
+  }
+
+  @Post('addConnectionToAgreement')
+  public async addConnectionToAgreement(
+    @Body() req: IUpdateContractConnectionRequest,
+    @Res() res: Response,
+  ) {
+    const mock = ADD_CONTRACT_CONNECTION_MOCK as IContractDetailsConnection;
+    mock.connectionId = Math.floor(Math.random() * 10000000);
+    mock.simId = req.simId;
+    return res.status(HttpStatus.OK).json(ADD_CONTRACT_CONNECTION_MOCK);
   }
 
   @Post('deleteConnectionFromAgreement')

@@ -70,10 +70,14 @@ export class GsignV2Controller {
     @Param('sessionId') sessionId: string,
     @Res() res: Response,
   ) {
-    const file = fs.readFileSync('./data/ao_preview.pdf');
-    const readStream = new stream.PassThrough();
-    readStream.end(file);
-    res.set('Content-Type', 'application/pdf');
-    readStream.pipe(res);
+    try {
+      const file = fs.readFileSync(__dirname + '/data/ao_preview.pdf');
+      const readStream = new stream.PassThrough();
+      readStream.end(file);
+      res.set('Content-Type', 'application/pdf');
+      readStream.pipe(res);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

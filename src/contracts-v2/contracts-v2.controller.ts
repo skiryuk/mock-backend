@@ -44,7 +44,11 @@ export class ContractsV2Controller {
     @Query('checkCode') checkCode: string,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.OK).json(this._getCheckResponse());
+    const mock = this._getCheckResponse();
+    mock.iccId = `8970199${Math.floor(
+      Math.random() * 100000000000,
+    ).toString()}`;
+    return res.status(HttpStatus.OK).json(mock);
   }
 
   @Get('tariffs')
