@@ -1,9 +1,13 @@
-import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import {
-  AuthCheckCodeLogonRequest, AuthCheckCodeLogonResponse,
-  AuthInSalepointRequest, AuthInSalepointResponse,
-  AuthLogonRequest, AuthLogonResponse, AuthRefreshResponse,
+  AuthCheckCodeLogonRequest,
+  AuthCheckCodeLogonResponse,
+  AuthInSalepointRequest,
+  AuthInSalepointResponse,
+  AuthLogonRequest,
+  AuthLogonResponse,
+  AuthRefreshResponse, IBeginRegisterRequest, IFinishRegisterRequest, IRegisterCheckCodeRequest,
   RefreshTokenRequest,
 } from './auth-v2.models';
 
@@ -12,7 +16,13 @@ import * as SMS_LOGON_MOCK from './data/sms-logon.json';
 import * as CONFIRM_SMS_LOGON_MOCK from './data/confirm-sms-logon.json';
 import * as AUTH_IN_SALES_POINT_MOCK from './data/auth-in-sales-point.json';
 import * as AUTH_USER_MOCK from './data/auth-user.json';
+import * as BEGIN_REGISTER_MOCK from './data/begin-register.json';
+import * as REG_CHECK_CODE_MOCK from './data/reg-check-code.json';
+import * as FINISH_REGISTER_MOCK from './data/finish-register.json';
 import * as REFRESH_TOKEN_ERROR_MOCK from './data/refr-token-err-unauth.json';
+
+import * as fs from 'fs';
+import * as stream from 'stream';
 
 @Controller('v2/auth')
 export class AuthV2Controller {
@@ -84,5 +94,49 @@ export class AuthV2Controller {
   @Get('check')
   public async authCheck(@Res() res: Response) {
     return res.status(HttpStatus.OK).json();
+  }
+
+  @Get('register/captcha/:phone')
+  public async getRegisterCaptcha(
+    @Param('phone') phone: string,
+    @Res() res: Response,
+  ) {
+    try {
+      const file = fs.readFileSync(__dirname + '/data/reg-captcha.png');
+      const readStream = new stream.PassThrough();
+      readStream.end(file);
+      res.set('Content-Type', 'image/png');
+      res.setHeader(
+        'x-captcha',
+        'Hzoa51tEi9+howS1QQmoimD5qsBowr8fFq4vMcxjoYQGC0Mva1ZvTgykVtxAYMuT7Ilsj/gdZ1q95CyPi3XEMt3KhmhM60pDblNG3A4R07DDnGLKRKrCQ4ADKNy9Fc1cEANSZHRyDEnqJvHCzSfw5w==',
+      );
+      readStream.pipe(res);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  @Post('register')
+  public async beginRegister(
+    @Body() req: IBeginRegisterRequest,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(BEGIN_REGISTER_MOCK);
+  }
+
+  @Post('register/check-code')
+  public async checkCode(
+    @Body() req: IRegisterCheckCodeRequest,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(REG_CHECK_CODE_MOCK);
+  }
+
+  @Post('register/create')
+  public async finishRegister(
+    @Body() req: IFinishRegisterRequest,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(FINISH_REGISTER_MOCK);
   }
 }

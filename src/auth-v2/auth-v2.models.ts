@@ -47,3 +47,27 @@ export interface AuthInSalepointResponse {
   refreshToken: AuthToken;
   accessToken: AuthToken;
 }
+
+export interface IBeginRegisterRequest {
+  phoneAsLogin: string;
+  checkCaptcha: ICheckCaptcha;
+}
+
+export interface ICheckCaptcha {
+  code: string;
+  token: string;
+}
+
+export interface IRegisterCheckCodeRequest {
+  code: string;
+  phoneAsLogin: string;
+}
+
+export interface IFinishRegisterRequest {
+  firstName: string;
+  lastName: string;
+  middleName?: string;
+  email: string;
+  newPassword: string;
+  accept: boolean;
+}
