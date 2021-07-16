@@ -34,6 +34,7 @@ import { ManagementModule } from './management/management.module';
 import { DealersModule } from './dealers/dealers.module';
 import { SalepointV2Module } from './salepoint-v2/salepoint-v2.module';
 import { AoV3Module } from './ao-v3/ao-v3.module';
+import { NotifyV1Module } from './notify-v1/notify-v1.module';
 
 @Module({
   imports: [
@@ -72,6 +73,7 @@ import { AoV3Module } from './ao-v3/ao-v3.module';
     DealersModule,
     SalepointV2Module,
     AoV3Module,
+    NotifyV1Module,
   ],
   controllers: [],
   providers: [],

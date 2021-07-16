@@ -1,4 +1,12 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { Response } from 'express';
 import {
   AuthCheckCodeLogonRequest,
@@ -7,7 +15,10 @@ import {
   AuthInSalepointResponse,
   AuthLogonRequest,
   AuthLogonResponse,
-  AuthRefreshResponse, IBeginRegisterRequest, IFinishRegisterRequest, IRegisterCheckCodeRequest,
+  AuthRefreshResponse,
+  IBeginRegisterRequest,
+  IFinishRegisterRequest,
+  IRegisterCheckCodeRequest,
   RefreshTokenRequest,
 } from './auth-v2.models';
 

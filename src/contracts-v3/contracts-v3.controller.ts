@@ -24,6 +24,7 @@ import * as EXIST_P_CHECK_POSSIBLE_MOCK from './data/exist-p-check-possible.json
 import * as GET_MNP_AGREEMENT_DETAILS_MOCK from './data/get-mnp-agreement-details.json';
 import * as GET_AGREEMENT_DETAILS_MOCK from './data/get-agreement-details.json';
 import * as CREATE_DRAFT_MOCK from './data/create-draft.json';
+import * as GET_BILL_PLANS_MOCK from './data/get-bill-plans.json';
 
 @Controller('v3/contract')
 export class ContractsV3Controller {
@@ -101,5 +102,14 @@ export class ContractsV3Controller {
       default:
         return NEW_D_CHECK_POSSIBLE_MOCK;
     }
+  }
+
+  @Get('tariffs')
+  public async getBillPlans(
+    @Query('iccId') iccId: string,
+    @Query('contractDate') contractDate: string,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(GET_BILL_PLANS_MOCK);
   }
 }
