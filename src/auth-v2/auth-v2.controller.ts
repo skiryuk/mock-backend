@@ -19,6 +19,7 @@ import {
   IBeginRegisterRequest,
   IFinishRegisterRequest,
   IRegisterCheckCodeRequest,
+  IRegisterResendCodeRequest,
   RefreshTokenRequest,
 } from './auth-v2.models';
 
@@ -27,9 +28,11 @@ import * as SMS_LOGON_MOCK from './data/sms-logon.json';
 import * as CONFIRM_SMS_LOGON_MOCK from './data/confirm-sms-logon.json';
 import * as AUTH_IN_SALES_POINT_MOCK from './data/auth-in-sales-point.json';
 import * as AUTH_USER_MOCK from './data/auth-user.json';
+import * as AUTH_USER_ERR_MOCK from './data/auth-user-err.json';
 import * as BEGIN_REGISTER_MOCK from './data/begin-register.json';
 import * as REG_CHECK_CODE_MOCK from './data/reg-check-code.json';
 import * as FINISH_REGISTER_MOCK from './data/finish-register.json';
+import * as REGISTER_RESEND_CODE_MOCK from './data/register-resend-code.json';
 import * as REFRESH_TOKEN_ERROR_MOCK from './data/refr-token-err-unauth.json';
 
 import * as fs from 'fs';
@@ -148,6 +151,14 @@ export class AuthV2Controller {
     @Body() req: IFinishRegisterRequest,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.OK).json(FINISH_REGISTER_MOCK);
+    return res.status(HttpStatus.BAD_REQUEST).json(AUTH_USER_ERR_MOCK);
+  }
+
+  @Post('register/resend-code')
+  public async registerResendCode(
+    @Body() req: IRegisterResendCodeRequest,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(REGISTER_RESEND_CODE_MOCK);
   }
 }

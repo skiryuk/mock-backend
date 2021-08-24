@@ -71,3 +71,7 @@ export interface IFinishRegisterRequest {
   newPassword: string;
   accept: boolean;
 }
+
+export interface IRegisterResendCodeRequest {
+  phoneAsLogin: string;
+}
