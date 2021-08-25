@@ -80,4 +80,20 @@ export class GsignV2Controller {
       console.log(e);
     }
   }
+
+  @Get('session/:sessionId/link/qr-code')
+  public async GetQrCode(
+    @Param('sessionId') sessionId: string,
+    @Res() res: Response,
+  ) {
+    try {
+      const file = fs.readFileSync(__dirname + '/data/qr-code.png');
+      const readStream = new stream.PassThrough();
+      readStream.end(file);
+      res.set('Content-Type', 'image/png');
+      readStream.pipe(res);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }

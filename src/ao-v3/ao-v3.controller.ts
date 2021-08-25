@@ -18,6 +18,7 @@ import * as CREATE_AO_MOCK from './data/create-ao.json';
 import * as GET_AO_BLOCKING_INFO_MOCK from './data/info/get-ao-blocking-info.json';
 import * as GET_AO_DETALIZATION_INFO_MOCK from './data/info/get-ao-detalization-info.json';
 import * as GET_AO_REJECTION_INFO_MOCK from './data/info/get-ao-rejection-info.json';
+import * as GET_AO_REPLACE_ESIM_INFO_MOCK from './data/info/get-ao-esim-replace-info.json';
 import * as GET_AO_REQ_INFO_MOCK from './data/get-ao-req-info.json';
 
 @Controller('v3/ao')
@@ -44,6 +45,8 @@ export class AoV3Controller {
         return res.status(HttpStatus.OK).json(GET_AO_DETALIZATION_INFO_MOCK);
       case ERequestOperationTypes.REJECT_CONTRACT:
         return res.status(HttpStatus.OK).json(GET_AO_REJECTION_INFO_MOCK);
+      case ERequestOperationTypes.PAID_REPLACE_ESIM:
+        return res.status(HttpStatus.OK).json(GET_AO_REPLACE_ESIM_INFO_MOCK);
     }
     return res.status(HttpStatus.OK).json(GET_AO_REQ_INFO_MOCK);
   }

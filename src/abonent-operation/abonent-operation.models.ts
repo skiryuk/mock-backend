@@ -72,3 +72,8 @@ export interface ITransferingOperationStatusReq {
   phoneNumberThatIsTransfered: string;
   transferingOperationIdentifier: string;
 }
+
+export interface IGetAbonentOperationListReq {
+  dateMaxAsLong: number;
+  dateMinAsLong: number;
+}

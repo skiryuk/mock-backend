@@ -56,5 +56,6 @@ export enum ERequestOperationTypes {
   SELFREG = 42, // Саморегистрация
   AUTOPAY = 43, // Автооплата
   MY_BEELINE = 44, // Установка приложения "Мой Билайн"
-  CHANGE_BILL_PLAN_ANTI_DOWNSELL = 45, // Смена тарифа через Call-центр
+  CHANGE_BILL_PLAN_ANTI_DOWNSELL = 45, // Смена тарифа через Call-центр,
+  PAID_REPLACE_ESIM = 46, // Смена тарифа через Call-центр
 }

@@ -367,3 +367,12 @@ export interface ICheckTransferNumberReq {
   phoneNumberThatIsTransfered: string;
   tmpPhoneNumber: string;
 }
+
+export interface ICheckRequestReq {
+  requestType: number;
+  ctn: string;
+}
+
+export interface IReserveEsimReq {
+  ctn: string;
+}

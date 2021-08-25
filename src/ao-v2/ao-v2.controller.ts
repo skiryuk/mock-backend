@@ -18,10 +18,11 @@ import * as fs from 'fs';
 import * as stream from 'stream';
 
 import {
+  ICheckRequestReq,
   ICheckTransferNumberReq,
   ICreateAbonentOperationRequest,
   ICreateGraphicSignSessionResponse,
-  IFilterListRequest,
+  IFilterListRequest, IReserveEsimReq,
 } from './ao-v2.models';
 import { ConfigService } from '../config/config.service';
 import { ERequestOperationTypes } from '../config/config.enums';
@@ -44,6 +45,7 @@ import * as GET_AO_REJECTION_INFO_MOCK from './data/info/get-ao-rejection-info.j
 import * as GET_AO_BLOCKING_DETAILS_MOCK from './data/details/get-ao-blocking-details.json';
 import * as GET_AO_DETALIZATION_DETAILS_MOCK from './data/details/get-ao-detalization-details.json';
 import * as GET_AO_REJECTION_DETAILS_MOCK from './data/details/get-ao-rejection-details.json';
+import * as GET_AO_PAID_REPLACE_ESIM_MOCK from './data/details/get-ao-paid-replace-esim.json';
 import * as GET_UPSELL_OFFERS_MOCK from './data/get-upsell-offers.json';
 import * as GET_CURRENT_BILL_PLAN_INFO_MOCK from './data/get-current-bill-plan-info.json';
 import * as GET_TARGET_OFFERS_MOCK from './data/get-target-offers.json';
@@ -96,6 +98,8 @@ export class AoV2Controller {
         return res.status(HttpStatus.OK).json(GET_AO_DETALIZATION_DETAILS_MOCK);
       case ERequestOperationTypes.REJECT_CONTRACT:
         return res.status(HttpStatus.OK).json(GET_AO_REJECTION_DETAILS_MOCK);
+      case ERequestOperationTypes.PAID_REPLACE_ESIM:
+        return res.status(HttpStatus.OK).json(GET_AO_PAID_REPLACE_ESIM_MOCK);
     }
     return res.status(HttpStatus.OK).json(GET_AO_DETAILS_MOCK);
   }
@@ -212,5 +216,18 @@ export class AoV2Controller {
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json(GET_TARGET_OFFERS_MOCK);
+  }
+
+  @Post('request/check')
+  public async checkRequest(
+    @Body() req: ICheckRequestReq,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json();
+  }
+
+  @Post('esim/reserve')
+  public async reserveEsim(@Body() req: IReserveEsimReq, @Res() res: Response) {
+    return res.status(HttpStatus.OK).json();
   }
 }

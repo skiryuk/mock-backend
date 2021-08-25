@@ -15,6 +15,7 @@ import {
   IConfirmSmsRequest,
   IConnectAvailableServiceRequest,
   IGetAbonentAdBillPlanInfoRequest,
+  IGetAbonentOperationListReq,
   ISendSmsIdentifyReq,
   ISetTargetOfferAnswerRequest,
   ISmsConfirmationInfoRequest,
@@ -46,6 +47,7 @@ import * as CHECK_SMS_IDENTIFY_MOCK from './data/check-sms-identify.json';
 import * as CHECK_TRANSFER_NUMBER_MOCK from './data/check-transfer-number.json';
 import * as CANCEL_CHECK_TRANSFER_NUMBER_MOCK from './data/cancel-check-transfer.json';
 import * as GET_TRANSFERRING_STATUS_MOCK from './data/get-transferring-status.json';
+import * as GET_AO_LIST from './data/get-ao-list.json';
 
 import * as fs from 'fs';
 import * as stream from 'stream';
@@ -249,6 +251,22 @@ export class AbonentOperationController {
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json();
+  }
+
+  @Get('unlockAbonentOperationRequest')
+  public async unlockAbonentOperationRequest(
+    @Query('requestId') requestId: string,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json();
+  }
+
+  @Post('getAbonentOperationList')
+  public async getAbonentOperationList(
+    @Body() req: IGetAbonentOperationListReq,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(GET_AO_LIST);
   }
 
   @Post('canPhoneNumberBeMoved')
