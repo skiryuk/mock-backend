@@ -151,7 +151,7 @@ export class AuthV2Controller {
     @Body() req: IFinishRegisterRequest,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.BAD_REQUEST).json(AUTH_USER_ERR_MOCK);
+    return res.status(HttpStatus.OK).json(FINISH_REGISTER_MOCK);
   }
 
   @Post('register/resend-code')

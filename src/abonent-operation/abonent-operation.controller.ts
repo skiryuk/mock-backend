@@ -261,6 +261,14 @@ export class AbonentOperationController {
     return res.status(HttpStatus.OK).json();
   }
 
+  @Get('lockAbonentOperationRequest')
+  public async lockAbonentOperationRequest(
+    @Query('requestId') requestId: string,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json();
+  }
+
   @Post('getAbonentOperationList')
   public async getAbonentOperationList(
     @Body() req: IGetAbonentOperationListReq,

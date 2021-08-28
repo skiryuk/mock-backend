@@ -8,8 +8,10 @@ import {
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
-import * as GET_AO_REQ_INFO_MOCK from './data/get-ao-req-info.json';
 import { ICheckAbonentOperationDataReq } from './abonent-operation-v2.models';
+
+import * as GET_AO_REQ_INFO_MOCK from './data/get-ao-req-info.json';
+import * as CHECK_ABONENT_DATA_ERR from './data/check-abonent-data-err.json';
 
 @Controller('v2/abonentOperation')
 export class AbonentOperationV2Controller {
@@ -26,6 +28,6 @@ export class AbonentOperationV2Controller {
     @Body() req: ICheckAbonentOperationDataReq,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.OK).json();
+    return res.status(HttpStatus.BAD_REQUEST).json(CHECK_ABONENT_DATA_ERR);
   }
 }
