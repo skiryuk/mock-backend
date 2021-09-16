@@ -1,0 +1,377 @@
+schema {
+    query: Query
+}
+
+
+type ContractItemBillPlanModel {
+
+    name: String!
+
+    soc: String!
+}
+
+
+type ContractItemConnectionModel {
+
+    billPlan: ContractItemBillPlanModel
+
+    canChangeBillPlan: Boolean!
+
+    connectionId: Int!
+
+    ctn: String
+
+    ctnPortation: String
+
+    firstUseDate: DateTime
+
+    iccid: String!
+
+    isActivated: Boolean!
+
+    scoringInfo: ContractItemScoringInfoModel
+}
+
+
+type ContractItemModel {
+
+    addDate: DateTime!
+
+    barcode: String
+
+    connections: [ContractItemConnectionModel!]!
+
+    contractCode: String!
+    contractDate: String!
+
+    contractId: Int!
+
+    ctn: String
+
+    dealerCode: String!
+
+    dealerPointCode: String!
+
+    editDate: DateTime
+
+    hasScans: Boolean!
+
+    iccid: String
+
+    isElectronic: Boolean!
+
+
+    isImportedFromUAPI: Boolean!
+
+    isLocked: Boolean!
+
+    isSelfRegistration: Boolean!
+
+    isSelfRegistrationDOL: Boolean!
+
+    login: String
+
+    registrationDate: DateTime
+
+    skadPointCode: String
+    skadPointName: String
+
+    status: Int!
+
+    statusAcrm: StatusAcrmEnum!
+
+    statusDate: DateTime!
+
+    statusName: String!
+
+    statusReason: String
+}
+
+
+type ContractItemScoringInfoModel {
+
+    description: String!
+
+    interval: Int!
+}
+
+
+type DealerInfoResponseV2Model {
+
+    canHaveSubDealers: Boolean!
+
+    channel: Int
+
+    dealerCode: String
+
+    filialName: String!
+
+    id: Long!
+
+    isActive: Boolean!
+
+    isAntivirus: Boolean!
+
+    isBroadband: Boolean!
+
+    isConvergence: Boolean!
+
+    isInternetShop: Boolean!
+
+    isSellerLinked: Boolean!
+
+    isTargetOffer: Boolean!
+
+    marketCode: String!
+
+    name: String!
+    updateDate: DateTime
+}
+
+type LocationModel {
+    id: Long!
+    name: String!
+    parentId: Long
+    parentName: String
+    typeId: Long!
+    typeName: String!
+    weight: Int!
+}
+
+type PagingResponseModelOfContractItemModel {
+    items: [ContractItemModel!]!
+    totalCount: Int!
+}
+
+
+type Query {
+
+    contractList(
+
+        model: ContractListRequestModelInput!
+    ): PagingResponseModelOfContractItemModel!
+
+    salePointHistory(model: FilterRequestModelInput!): SalePointsHistoryResponseModel!
+
+    salePoints(
+
+        model: FilterRequestModelInput!
+    ): SalesPointListResponseModel!
+}
+
+
+type SalePointsHistoryResponseModel {
+    items: [SalesPointHistoryItemV2Model!]!
+    totalCount: Int!
+}
+
+
+type SalesPointHistoryItemV2Model {
+
+    addressNotes: String
+
+    brandingType: Long
+
+    channel: Long!
+
+    cluster: Long
+
+    code: String!
+
+    codeAmdocs: String
+
+    dealer: DealerInfoResponseV2Model
+
+    dealerId: Long
+
+    house: String!
+
+    id: Long!
+
+    isActive: Boolean!
+
+    isHidden: Boolean!
+    lastAuthDate: DateTime!
+
+    lat: Float
+
+    lng: Float
+
+    name: String!
+
+    owner: String
+
+    phones: String
+
+    role: Long!
+
+    street: StreetModel!
+
+    streetId: Long!
+    updateDate: DateTime
+}
+
+
+type SalesPointListItemResponseModel {
+
+    addressNotes: String
+
+    brandingType: Long
+
+    channel: Long!
+
+    cluster: Long
+
+    code: String!
+
+    codeAmdocs: String
+
+    dealer: DealerInfoResponseV2Model
+
+    dealerId: Long
+
+    house: String!
+
+    id: Long!
+
+    isActive: Boolean!
+    isSellerLinked: Boolean!
+
+    lat: Float
+
+    lng: Float
+
+    name: String!
+
+    owner: String
+
+    phones: String
+
+    street: StreetModel!
+
+    streetId: Long!
+    updateDate: DateTime
+}
+
+
+type SalesPointListResponseModel {
+    items: [SalesPointListItemResponseModel!]!
+    totalCount: Int!
+}
+
+type StreetModel {
+    id: Long!
+    location: LocationModel!
+    locationId: Long!
+    name: String!
+    typeId: Long!
+    typeName: String!
+}
+
+
+enum FilterByLogic {
+
+    AND
+
+    OR
+}
+
+
+enum FilterByOperator {
+
+    ANY
+
+    CONTAINS
+
+    ENDS_WITH
+
+    EQ
+
+    GT
+
+    GTE
+
+    LT
+
+    LTE
+
+    NEQ
+
+    NOT_ANY
+
+    NOT_CONTAINS
+
+    NOT_ENDS_WITH
+
+    NOT_STARTS_WITH
+
+    STARTS_WITH
+}
+
+
+enum StatusAcrmEnum {
+
+    ALLOWED
+
+    DEFAULT
+
+    FORBIDDEN
+
+    TEMPORARILY_FORBIDDEN
+}
+
+
+input ContractListRequestModelInput {
+
+    filterBy: FilterByGroupModelInput
+
+    limit: Int!
+
+    offset: Int!
+
+    orderBy: [OrderByModelInput!]
+}
+
+
+input FilterByGroupModelInput {
+
+    groups: [FilterByGroupModelInput!]!
+
+    items: [FilterByModelInput!]!
+
+    logic: FilterByLogic!
+}
+
+
+input FilterByModelInput {
+
+    field: String!
+
+    op: FilterByOperator!
+
+    value: String
+}
+
+
+input FilterRequestModelInput {
+
+    filterBy: FilterByGroupModelInput
+
+    limit: Int!
+
+    offset: Int!
+
+    orderBy: [OrderByModelInput!]
+}
+
+
+input OrderByModelInput {
+    desc: Boolean!
+
+    field: String!
+}
+
+
+scalar DateTime
+
+scalar Long

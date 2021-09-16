@@ -54,7 +54,8 @@ import * as GET_TARGET_OFFERS_MOCK from './data/get-target-offers.json';
 
 @Controller('v2/ao')
 export class AoV2Controller {
-  constructor(private _configService: ConfigService) {}
+  constructor(private _configService: ConfigService) {
+  }
 
   @Post('request/:requestId/gsign')
   public async requestGSign(
@@ -235,5 +236,31 @@ export class AoV2Controller {
   @Post('esim/reserve')
   public async reserveEsim(@Body() req: IReserveEsimReq, @Res() res: Response) {
     return res.status(HttpStatus.OK).json();
+  }
+
+  @Post('request/:requestId/send-mail')
+  public async sendEsimQrCode(
+    @Param('requestId') requestId: number,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json();
+  }
+
+  @Get('request/:requestId/esim/pdf')
+  public async printEsimQrCode(
+    @Query('access_token') accessToken: string,
+    @Res() res: Response,
+  ) {
+    try {
+      const file = fs.readFileSync(
+        __dirname.replace('dist/src', 'dist') + '/data/ao_print.pdf',
+      );
+      const readStream = new stream.PassThrough();
+      readStream.end(file);
+      res.set('Content-Type', 'application/pdf');
+      readStream.pipe(res);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

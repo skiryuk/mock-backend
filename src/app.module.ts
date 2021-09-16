@@ -36,6 +36,10 @@ import { SalepointV2Module } from './salepoint-v2/salepoint-v2.module';
 import { AoV3Module } from './ao-v3/ao-v3.module';
 import { NotifyV1Module } from './notify-v1/notify-v1.module';
 import { AoV1Module } from './ao-v1/ao-v1.module';
+import { GraphQLModule } from '@nestjs/graphql';
+
+import { join } from 'path';
+import { ContractsResolver } from './graphql/resolvers/contracts.resolver';
 
 @Module({
   imports: [
@@ -76,8 +80,15 @@ import { AoV1Module } from './ao-v1/ao-v1.module';
     AoV3Module,
     NotifyV1Module,
     AoV1Module,
+    GraphQLModule.forRoot({
+      typePaths: ['./src/graphql/gq_scheme.graphql'],
+      definitions: {
+        path: join(process.cwd(), 'src/graphql/graphql.ts'),
+        outputAs: 'class',
+      },
+    }),
   ],
   controllers: [],
-  providers: [],
+  providers: [ContractsResolver],
 })
 export class AppModule {}
