@@ -8,6 +8,7 @@ import { IContractDetailsConnection, IUpdateContractConnectionRequest } from '..
 import * as ADD_CONTRACT_CONNECTION_MOCK from './data/add-contract-connection.json';
 import { ICreateDraftRequest } from './contracts-v4.models';
 import * as CREATE_DRAFT_MOCK from './data/create-draft.json';
+import * as RESERVE_ESIM_MOCK from './data/reserve-esim.json';
 
 @Controller('v4/contract')
 export class ContractsV4Controller {
@@ -53,5 +54,12 @@ export class ContractsV4Controller {
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json(CREATE_DRAFT_MOCK);
+  }
+
+  @Post('esim/reserve')
+  public async reserveEsim(
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(RESERVE_ESIM_MOCK);
   }
 }
