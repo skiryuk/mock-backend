@@ -2,7 +2,8 @@
   "contracts": {
     "mode": "new",
     "kit": "d",
-    "mnp": false
+    "mnp": false,
+    "family": true
   },
   "ao": {
     "type": 46

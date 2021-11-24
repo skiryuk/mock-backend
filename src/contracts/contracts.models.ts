@@ -28,6 +28,7 @@ export interface IConfirmOpenContractBySmsRequest {
 }
 
 export interface IUpdateContractConnectionRequest {
+  ctnBeautiful: string;
   checkCode: string;
   contractId: number;
   includedServicesIds: Array<number>;

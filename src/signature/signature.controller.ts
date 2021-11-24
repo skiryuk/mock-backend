@@ -14,6 +14,7 @@ import * as GET_LAST_SIGNATURE_MOCK from './data/last-signature.json';
 import * as GET_SIGNATURE_HISTORY_MOCK from './data/signature-history.json';
 import * as SIGNATURE_CONTENT_MOCK from './data/signature-content.json';
 import * as GET_CONFIRMED_SIGNATURE_MOCK from './data/get-confirmed-signature.json';
+import * as CHECK_SIGNATURE_MOCK from './data/check-signature.json';
 
 @Controller('signature')
 export class SignatureController {
@@ -35,6 +36,12 @@ export class SignatureController {
   @Get('getConfirmedSignature')
   public async getConfirmedSignature(@Res() res: Response) {
     return res.status(HttpStatus.OK).json(GET_CONFIRMED_SIGNATURE_MOCK);
+  }
+  @Get('checkSignature')
+  public async checkSignature(
+    @Query('dealerCode') dealerCode: string,
+    @Res() res: Response) {
+    return res.status(HttpStatus.OK).json(CHECK_SIGNATURE_MOCK);
   }
 
   @Post('SaveSignatureContent')

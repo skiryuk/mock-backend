@@ -33,6 +33,8 @@ import * as GET_BILL_PLANS_MOCK from './data/get-bill-plans.json';
 import * as GET_PAY_SYSTEMS_MOCK from './data/get-pay-systems.json';
 import * as GET_DOC_TYPES_MOCK from './data/doc-types.json';
 import * as GET_COUNTRY_TYPES_MOCK from './data/country-types.json';
+import * as GET_PERSON_TYPES_MOCK from './data/get-person-types.json';
+import * as GET_COMPANY_TYPES_MOCK from './data/get-company-types.json';
 import * as SEND_TO_REG_MOCK from './data/send-to-reg.json';
 import * as SEND_TO_E_REG_MOCK from './data/send-to-e-reg.json';
 import * as BUILDING_TYPES_MOCK from './data/building-types.json';
@@ -135,6 +137,16 @@ export class ContractsController {
   @Get('getCountryTypes')
   public async getCountryTypes(@Res() res: Response) {
     return res.status(HttpStatus.OK).json(GET_COUNTRY_TYPES_MOCK);
+  }
+
+  @Get('getPersonTypes')
+  public async getPersonTypes(@Res() res: Response) {
+    return res.status(HttpStatus.OK).json(GET_PERSON_TYPES_MOCK);
+  }
+
+  @Get('getCompanyTypes')
+  public async getCompanyTypes(@Res() res: Response) {
+    return res.status(HttpStatus.OK).json(GET_COMPANY_TYPES_MOCK);
   }
 
   @Post('addConnectionToAgreement')

@@ -16,6 +16,7 @@ import {
   IUpdateAoGraphicSessionRequest,
   IUpdateContractGraphicSessionRequest,
 } from './gsign-v2.models';
+
 import * as fs from 'fs';
 import * as stream from 'stream';
 
@@ -29,6 +30,22 @@ export class GsignV2Controller {
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.NO_CONTENT).json();
+  }
+
+  @Get('session/:sessionId/image')
+  public async getSignature(
+    @Param('sessionId') sessionId: string,
+    @Res() res: Response,
+  ) {
+    try {
+      const file = fs.readFileSync(__dirname.replace('src/', '') + '/data/signature.png');
+      const readStream = new stream.PassThrough();
+      readStream.end(file);
+      res.set('Content-Type', 'image/png');
+      readStream.pipe(res);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   @Put('session/:sessionId/contract/abonent')

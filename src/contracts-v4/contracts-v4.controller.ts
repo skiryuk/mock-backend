@@ -1,12 +1,16 @@
 import { Body, Controller, Get, HttpStatus, Param, Post, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
+
+import { ConfigService } from '../config/config.service';
+
+import { IContractDetailsConnection, IUpdateContractConnectionRequest } from '../contracts/contracts.models';
+import { ICreateDraftRequest } from './contracts-v4.models';
+
 import * as GET_MNP_AGREEMENT_DETAILS_MOCK from './data/get-mnp-agreement-details.json';
 import * as GET_AGREEMENT_DETAILS_MOCK from './data/get-agreement-details.json';
-import { ConfigService } from '../config/config.service';
-import * as GET_BILL_PLANS_MOCK from './data/get-bill-plans.json';
-import { IContractDetailsConnection, IUpdateContractConnectionRequest } from '../contracts/contracts.models';
 import * as ADD_CONTRACT_CONNECTION_MOCK from './data/add-contract-connection.json';
-import { ICreateDraftRequest } from './contracts-v4.models';
+import * as GET_BILL_PLANS_MOCK from './data/get-bill-plans.json';
+import * as GET_BILL_PLANS_FAMILY_MOCK from './data/get-bill-plans-family.json';
 import * as CREATE_DRAFT_MOCK from './data/create-draft.json';
 import * as RESERVE_ESIM_MOCK from './data/reserve-esim.json';
 
@@ -34,7 +38,11 @@ export class ContractsV4Controller {
     @Query('contractDate') contractDate: string,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.OK).json(GET_BILL_PLANS_MOCK);
+    if (this._configService.config.contracts.family) {
+      return res.status(HttpStatus.OK).json(GET_BILL_PLANS_FAMILY_MOCK);
+    } else {
+      return res.status(HttpStatus.OK).json(GET_BILL_PLANS_MOCK);
+    }
   }
 
   @Post('connection/create')

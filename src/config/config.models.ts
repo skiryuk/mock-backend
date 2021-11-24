@@ -7,6 +7,7 @@ export interface ContractsConfig {
   mode: string;
   kit: string;
   mnp: boolean;
+  family: boolean;
 }
 
 export interface AoConfig {
