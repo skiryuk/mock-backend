@@ -8,6 +8,7 @@ export interface ContractsConfig {
   kit: string;
   mnp: boolean;
   family: boolean;
+  confirmBySms: boolean;
 }
 
 export interface AoConfig {

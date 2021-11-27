@@ -73,3 +73,10 @@ export interface IContractAd {
   name: string;
   type: number;
 }
+
+export interface ICheckCustomerResponse {
+  needSMSCode: boolean;
+  needEnvelopeCode: boolean;
+  iccId: string;
+  ctn: string;
+}

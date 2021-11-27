@@ -13,6 +13,7 @@ import { Response } from 'express';
 import { EContractsKits, EContractsModes } from '../config/config.enums';
 import { ConfigService } from '../config/config.service';
 import {
+  ICheckCustomerResponse,
   IConfirmOpenContractBySmsRequest, IContractDetailsConnection,
   IGetBillingPlansRequest,
   IRemoveContractConnectionRequest,
@@ -55,8 +56,6 @@ import * as CONFIRM_CONTRACT_OPEN_SMS from './data/confirm-contract-open-sms.jso
 import * as ADD_CONTRACT_CONNECTION_MOCK from './data/add-contract-connection.json';
 
 import { EProfileAliases } from './contracts.enums';
-import * as SMS_LOGON_MOCK from '../auth-v2/data/sms-logon.json';
-import { AuthLogonResponse } from '../auth-v2/auth-v2.models';
 
 @Controller('contract')
 export class ContractsController {
@@ -71,31 +70,44 @@ export class ContractsController {
       case EContractsModes.NEW:
         switch (this._configService.config.contracts.kit) {
           case EContractsKits.D: {
+            let mock;
             if (this._configService.config.contracts.mnp) {
-              return res
-                .status(HttpStatus.OK)
-                .json(NEW_D_MNP_CHECK_CUSTOMER_MOCK);
+              mock =  NEW_D_MNP_CHECK_CUSTOMER_MOCK as ICheckCustomerResponse;
             } else {
-              return res.status(HttpStatus.OK).json(NEW_D_CHECK_CUSTOMER_MOCK);
+              mock =  NEW_D_CHECK_CUSTOMER_MOCK as ICheckCustomerResponse;
             }
+            mock.needEnvelopeCode = !this._configService.config.contracts.confirmBySms;
+            mock.needSMSCode = this._configService.config.contracts.confirmBySms;
+            return res
+              .status(HttpStatus.OK)
+              .json(mock);
           }
           default:
-            return res.status(HttpStatus.OK).json(NEW_D_CHECK_CUSTOMER_MOCK);
+            const mock =  NEW_D_CHECK_CUSTOMER_MOCK as ICheckCustomerResponse;
+            mock.needEnvelopeCode = !this._configService.config.contracts.confirmBySms;
+            mock.needSMSCode = this._configService.config.contracts.confirmBySms;
+            return res.status(HttpStatus.OK).json(mock);
         }
       case EContractsModes.EDIT:
         switch (this._configService.config.contracts.kit) {
-          case EContractsKits.D:
+          case EContractsKits.D: {
+            let mock;
             if (this._configService.config.contracts.mnp) {
-              return res
-                .status(HttpStatus.OK)
-                .json(EXIST_D_MNP_CHECK_CUSTOMER_MOCK);
+              mock = EXIST_D_MNP_CHECK_CUSTOMER_MOCK as ICheckCustomerResponse;
             } else {
-              return res
-                .status(HttpStatus.OK)
-                .json(EXIST_D_CHECK_CUSTOMER_MOCK);
+              mock = EXIST_D_CHECK_CUSTOMER_MOCK as ICheckCustomerResponse;
             }
+            mock.needEnvelopeCode = !this._configService.config.contracts.confirmBySms;
+            mock.needSMSCode = this._configService.config.contracts.confirmBySms;
+            return res
+              .status(HttpStatus.OK)
+              .json(mock);
+          }
           default:
-            return res.status(HttpStatus.OK).json(EXIST_D_CHECK_CUSTOMER_MOCK);
+            const mock =  EXIST_D_CHECK_CUSTOMER_MOCK as ICheckCustomerResponse;
+            mock.needEnvelopeCode = !this._configService.config.contracts.confirmBySms;
+            mock.needSMSCode = this._configService.config.contracts.confirmBySms;
+            return res.status(HttpStatus.OK).json(mock);
         }
       default:
         return res.status(HttpStatus.OK).json(NEW_D_CHECK_CUSTOMER_MOCK);
@@ -157,7 +169,7 @@ export class ContractsController {
     const mock = ADD_CONTRACT_CONNECTION_MOCK as IContractDetailsConnection;
     mock.connectionId = Math.floor(Math.random() * 10000000);
     mock.simId = req.simId;
-    return res.status(HttpStatus.OK).json(ADD_CONTRACT_CONNECTION_MOCK);
+    return res.status(HttpStatus.OK).json(mock);
   }
 
   @Post('deleteConnectionFromAgreement')

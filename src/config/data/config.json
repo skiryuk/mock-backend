@@ -3,7 +3,8 @@
     "mode": "new",
     "kit": "d",
     "mnp": false,
-    "family": true
+    "family": true,
+    "confirmBySms": false
   },
   "ao": {
     "type": 46
