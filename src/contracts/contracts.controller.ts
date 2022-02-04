@@ -6,7 +6,7 @@ import {
   Param,
   Post,
   Query,
-  Res,
+  Res, UploadedFile, UseInterceptors,
 } from '@nestjs/common';
 import { Response } from 'express';
 
@@ -56,6 +56,7 @@ import * as CONFIRM_CONTRACT_OPEN_SMS from './data/confirm-contract-open-sms.jso
 import * as ADD_CONTRACT_CONNECTION_MOCK from './data/add-contract-connection.json';
 
 import { EProfileAliases } from './contracts.enums';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('contract')
 export class ContractsController {
@@ -255,6 +256,15 @@ export class ContractsController {
   @Get('attachment/ecm-error-count')
   public async getEcmErrorCount(@Res() res: Response) {
     return res.status(HttpStatus.OK).json(GET_ECM_ERROR_COUNTS_MOCK);
+  }
+
+  @Post('attachment')
+  @UseInterceptors(FileInterceptor('file'))
+  public async uploadAttachment(
+    @UploadedFile() file: Express.Multer.File,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json();
   }
 
   @Post('GetDealerBillingPlans')
