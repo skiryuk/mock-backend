@@ -51,6 +51,7 @@ import * as GET_AO_PAID_REPLACE_ESIM_INFO_MOCK from './data/info/get-ao-esim-rep
 import * as GET_UPSELL_OFFERS_MOCK from './data/get-upsell-offers.json';
 import * as GET_CURRENT_BILL_PLAN_INFO_MOCK from './data/get-current-bill-plan-info.json';
 import * as GET_TARGET_OFFERS_MOCK from './data/get-target-offers.json';
+import * as GET_REFUND_PAYMENT_MOCK from './data/get-refund-payment.json';
 
 @Controller('v2/ao')
 export class AoV2Controller {
@@ -244,6 +245,15 @@ export class AoV2Controller {
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json();
+  }
+
+  @Get('refund')
+  public async getRefundPayment(
+    @Query('ctn') ctn: string,
+    @Query('soc') soc: string,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(GET_REFUND_PAYMENT_MOCK);
   }
 
   @Get('request/:requestId/esim/pdf')
