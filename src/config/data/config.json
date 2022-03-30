@@ -1,6 +1,6 @@
 {
   "contracts": {
-    "mode": "new",
+    "mode": "edit",
     "kit": "d",
     "mnp": false,
     "family": true,

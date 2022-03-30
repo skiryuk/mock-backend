@@ -8,6 +8,7 @@ import { ICreateDraftRequest } from './contracts-v4.models';
 
 import * as GET_MNP_AGREEMENT_DETAILS_MOCK from './data/get-mnp-agreement-details.json';
 import * as GET_AGREEMENT_DETAILS_MOCK from './data/get-agreement-details.json';
+import * as GET_AGREEMENT_DETAILS_MULTIPLE_CONN_MOCK from './data/get-agreement-details__multiple-conn.json';
 import * as ADD_CONTRACT_CONNECTION_MOCK from './data/add-contract-connection.json';
 import * as GET_BILL_PLANS_MOCK from './data/get-bill-plans.json';
 import * as GET_BILL_PLANS_FAMILY_MOCK from './data/get-bill-plans-family.json';
@@ -28,7 +29,7 @@ export class ContractsV4Controller {
     if (this._configService.config.contracts.mnp) {
       return res.status(HttpStatus.OK).json(GET_MNP_AGREEMENT_DETAILS_MOCK);
     } else {
-      return res.status(HttpStatus.OK).json(GET_AGREEMENT_DETAILS_MOCK);
+      return res.status(HttpStatus.OK).json(GET_AGREEMENT_DETAILS_MULTIPLE_CONN_MOCK);
     }
   }
 

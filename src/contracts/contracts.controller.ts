@@ -13,7 +13,7 @@ import { Response } from 'express';
 import { EContractsKits, EContractsModes } from '../config/config.enums';
 import { ConfigService } from '../config/config.service';
 import {
-  ICheckCustomerResponse,
+  ICheckCustomerResponse, ICommitAttachmentsRequest,
   IConfirmOpenContractBySmsRequest, IContractDetailsConnection,
   IGetBillingPlansRequest,
   IRemoveContractConnectionRequest,
@@ -54,6 +54,7 @@ import * as GET_DEALER_BILLING_PLANS_MOCK from './data/get-dealer-billing-plans.
 import * as SEND_CONTRACT_OPEN_SMS from './data/send-contract-open-sms.json';
 import * as CONFIRM_CONTRACT_OPEN_SMS from './data/confirm-contract-open-sms.json';
 import * as ADD_CONTRACT_CONNECTION_MOCK from './data/add-contract-connection.json';
+import * as ATTACHMENTS_COMMIT_MOCK from './data/attachments-commit.json';
 
 import { EProfileAliases } from './contracts.enums';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -289,5 +290,13 @@ export class ContractsController {
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json(CONFIRM_CONTRACT_OPEN_SMS);
+  }
+
+  @Post('attachments-commit')
+  public async commitAttachments(
+    @Body() req: ICommitAttachmentsRequest,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(ATTACHMENTS_COMMIT_MOCK);
   }
 }

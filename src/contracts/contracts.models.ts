@@ -80,3 +80,10 @@ export interface ICheckCustomerResponse {
   iccId: string;
   ctn: string;
 }
+
+export interface ICommitAttachmentsRequest {
+  contractId: number;
+  doRecognizeDocument: boolean;
+  scanType: number;
+  tid: string;
+}

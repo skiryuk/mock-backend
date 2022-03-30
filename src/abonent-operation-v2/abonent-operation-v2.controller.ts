@@ -28,6 +28,6 @@ export class AbonentOperationV2Controller {
     @Body() req: ICheckAbonentOperationDataReq,
     @Res() res: Response,
   ) {
-    return res.status(HttpStatus.BAD_REQUEST).json(CHECK_ABONENT_DATA_ERR);
+    return res.status(HttpStatus.OK).json();
   }
 }
