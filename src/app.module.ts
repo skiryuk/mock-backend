@@ -41,6 +41,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ContractsResolver } from './graphql/resolvers/contracts.resolver';
 import { ContractsV4Module } from './contracts-v4/contracts-v4.module';
+import { RegistryV2Module } from './registry-v2/registry-v2.module';
 
 @Module({
   imports: [
@@ -89,6 +90,7 @@ import { ContractsV4Module } from './contracts-v4/contracts-v4.module';
       },
     }),
     ContractsV4Module,
+    RegistryV2Module,
   ],
   controllers: [],
   providers: [ContractsResolver],
