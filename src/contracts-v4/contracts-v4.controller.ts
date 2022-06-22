@@ -33,6 +33,19 @@ export class ContractsV4Controller {
     }
   }
 
+  @Get(':contractId/info2')
+  public async getAgreementDetailsV5(
+    @Param('contractId') contractId: number,
+    @Query('isFromRegistry') isFromRegistry: boolean,
+    @Res() res: Response,
+  ) {
+    if (this._configService.config.contracts.mnp) {
+      return res.status(HttpStatus.OK).json(GET_MNP_AGREEMENT_DETAILS_MOCK);
+    } else {
+      return res.status(HttpStatus.OK).json(GET_AGREEMENT_DETAILS_MULTIPLE_CONN_MOCK);
+    }
+  }
+
   @Get('tariffs')
   public async getBillPlansV4(
     @Query('iccId') iccId: string,
@@ -59,6 +72,14 @@ export class ContractsV4Controller {
 
   @Post('create')
   public async createDraftV4(
+    @Body() req: ICreateDraftRequest,
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(CREATE_DRAFT_MOCK);
+  }
+
+  @Post('create2')
+  public async createDraftV5(
     @Body() req: ICreateDraftRequest,
     @Res() res: Response,
   ) {
