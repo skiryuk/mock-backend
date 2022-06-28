@@ -42,6 +42,7 @@ import { join } from 'path';
 import { ContractsResolver } from './graphql/resolvers/contracts.resolver';
 import { ContractsV4Module } from './contracts-v4/contracts-v4.module';
 import { RegistryV2Module } from './registry-v2/registry-v2.module';
+import { AoV4Module } from './ao-v4/ao-v4.module';
 
 @Module({
   imports: [
@@ -91,6 +92,7 @@ import { RegistryV2Module } from './registry-v2/registry-v2.module';
     }),
     ContractsV4Module,
     RegistryV2Module,
+    AoV4Module,
   ],
   controllers: [],
   providers: [ContractsResolver],
