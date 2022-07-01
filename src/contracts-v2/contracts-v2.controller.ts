@@ -24,6 +24,7 @@ import * as SEND_TO_MNP_REG_MOCK from './data/send-to-mnp-reg.json';
 import * as SEND_TO_MNP_E_REG_MOCK from './data/send-to-e-mnp-reg.json';
 import * as SEND_TO_REG_MOCK from './data/send-to-reg.json';
 import * as CREATE_GSIGN_MOCK from './data/create-gsign.json';
+import * as GET_DOC_TYPES from './data/doc-types.json';
 
 import {
   ContractListFilterRequest,
@@ -33,6 +34,7 @@ import {
 } from './contracts-v2.models';
 import { ConfigService } from '../config/config.service';
 import { EContractsKits, EContractsModes } from '../config/config.enums';
+
 
 @Controller('v2/contract')
 export class ContractsV2Controller {
@@ -58,6 +60,13 @@ export class ContractsV2Controller {
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json(GET_BILL_PLANS_MOCK);
+  }
+
+  @Get('draft/identity-document-types')
+  public async loadContractDOocTypes(
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.OK).json(GET_DOC_TYPES);
   }
 
   @Post('list')
