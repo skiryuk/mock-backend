@@ -43,6 +43,7 @@ import { ContractsResolver } from './graphql/resolvers/contracts.resolver';
 import { ContractsV4Module } from './contracts-v4/contracts-v4.module';
 import { RegistryV2Module } from './registry-v2/registry-v2.module';
 import { AoV4Module } from './ao-v4/ao-v4.module';
+import { PassportV3Module } from './passport-v3/passport-v3.module';
 
 @Module({
   imports: [
@@ -93,6 +94,7 @@ import { AoV4Module } from './ao-v4/ao-v4.module';
     ContractsV4Module,
     RegistryV2Module,
     AoV4Module,
+    PassportV3Module,
   ],
   controllers: [],
   providers: [ContractsResolver],
