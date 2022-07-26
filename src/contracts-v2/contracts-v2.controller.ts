@@ -75,6 +75,11 @@ export class ContractsV2Controller {
     @Res() res: Response,
   ) {
     return res.status(HttpStatus.OK).json(GET_FILTERED_CONTRACTS_LIST_MOCK);
+    /*
+    return res.status(HttpStatus.UNAUTHORIZED).json({
+      reason: 'wrong_security_stamp'
+    });
+     */
   }
 
   @Post('list/filters')

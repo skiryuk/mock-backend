@@ -100,6 +100,13 @@ export class AuthV2Controller {
     return res.status(HttpStatus.OK).json(mock);
   }
 
+  @Post('sign-out-all')
+  public async signOutAll(
+    @Res() res: Response,
+  ) {
+    return res.status(HttpStatus.NO_CONTENT).json();
+  }
+
   @Get('user')
   public async getAuthUser(@Res() res: Response) {
     return res.status(HttpStatus.OK).json(AUTH_USER_MOCK);

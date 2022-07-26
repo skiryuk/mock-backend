@@ -44,6 +44,7 @@ import { ContractsV4Module } from './contracts-v4/contracts-v4.module';
 import { RegistryV2Module } from './registry-v2/registry-v2.module';
 import { AoV4Module } from './ao-v4/ao-v4.module';
 import { PassportV3Module } from './passport-v3/passport-v3.module';
+import { LogoutV1Module } from './logout-v1/logout-v1.module';
 
 @Module({
   imports: [
@@ -95,6 +96,7 @@ import { PassportV3Module } from './passport-v3/passport-v3.module';
     RegistryV2Module,
     AoV4Module,
     PassportV3Module,
+    LogoutV1Module,
   ],
   controllers: [],
   providers: [ContractsResolver],
